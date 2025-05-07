@@ -25,7 +25,12 @@ def test_encrypt_jhon_doe_example():
         },
     )
     assert response.status_code == 200
-    response_json = response.json()
-    assert response_json.get("name") == "Sm9obiBEb2U="
-    assert response_json.get("age") == "MzA="
-    assert response_json.get("contact").startswith("eyJlbWFpbCI6ImpvaG5AZXhhbXBsZS5j")
+
+    name = response.json().get("name")
+    assert name == "Sm9obiBEb2U="
+
+    age = response.json().get("age")
+    assert age == "MzA="
+
+    contact = response.json().get("contact")
+    assert contact.startswith("eyJlbWFpbCI6ImpvaG5AZXhhbXBsZS5j")
