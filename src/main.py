@@ -1,7 +1,10 @@
 from typing import Dict
 
 import base64
+import hashlib
 import json
+import hmac
+import os
 
 from fastapi import FastAPI, HTTPException
 
@@ -49,3 +52,19 @@ def post_decrypt(payload: Dict | None = None) -> Dict:
         except Exception:
             decrypted_data.update({key: value})
     return decrypted_data
+
+
+@app.post("/sign")
+def post_sign(payload: Dict | None = None) -> Dict:
+    if payload is None:
+        raise HTTPException(status_code=400, detail="Invalid payload")
+
+    payload = dict(sorted(payload.items()))
+
+    secret_key = os.environ.get("SECRET_KEY")
+
+    signature = hmac.new(
+        bytes(secret_key, "utf-8"), bytes(json.dumps(payload), "utf-8"), hashlib.sha256
+    ).hexdigest()
+
+    return {"signature": signature}

@@ -5,6 +5,7 @@ on: [push, pull_request]
 jobs:
   unittest:
     runs-on: ubuntu-latest
+    environment: riot-assessment
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,3 +20,6 @@ jobs:
 
       - name: Run unit tests
         run: pytest test/
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        
