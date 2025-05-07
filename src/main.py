@@ -22,15 +22,10 @@ def post_encrypt(payload: Dict | None = None) -> Dict:
     for key, value in payload.items():
         if type(value) is dict:
             encoded_value = base64.b64encode(
-                bytes(
-                    "{" + ", ".join(f'"{k}":"{v}"' for k, v in value.items()) + "}",
-                    "utf-8",
-                )
+                bytes(json.dumps(value, separators=(",", ":")), "utf-8")
             )
         else:
             encoded_value = base64.b64encode(bytes(str(value), "utf-8"))
         encrypted_data.update({key: encoded_value})
 
     return encrypted_data
-
-
