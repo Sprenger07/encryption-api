@@ -67,3 +67,83 @@ def test_decrypt_with_no_crypted_date():
 
     birth_date = response.json().get("birth_date")
     assert birth_date == "1998-11-19"
+
+
+def test_decrypt_with_encrypt_endpoint():
+    payload = {
+        "name": "user",
+        "age": 42,
+        "contact": "098-765-4321",
+    }
+
+    encrypt_response = client.post(
+        "/encrypt",
+        json=payload,
+    )
+    assert encrypt_response.status_code == 200
+    encrypted_payload = encrypt_response.json()
+
+    decrypt_response = client.post("/decrypt", json=encrypted_payload)
+    assert decrypt_response.json() == payload
+
+
+def test_decrypt_with_encrypt_endpoint_with_string_instead_of_int():
+    payload = {
+        "name": "user",
+        "age": "42",
+        "contact": "098-765-4321",
+    }
+
+    encrypt_response = client.post(
+        "/encrypt",
+        json=payload,
+    )
+    assert encrypt_response.status_code == 200
+    encrypted_payload = encrypt_response.json()
+
+    decrypt_response = client.post("/decrypt", json=encrypted_payload)
+    assert decrypt_response.json() == payload
+
+
+def test_decrypt_with_encrypt_endpoint_with_list():
+    payload = {"hello_word ": ["hello", "word"]}
+
+    encrypt_response = client.post(
+        "/encrypt",
+        json=payload,
+    )
+    assert encrypt_response.status_code == 200
+    encrypted_payload = encrypt_response.json()
+
+    decrypt_response = client.post("/decrypt", json=encrypted_payload)
+    assert decrypt_response.json() == payload
+
+
+def test_decrypt_with_encrypt_endpoint_with_boolean():
+    payload = {"True": True, "False": False}
+
+    encrypt_response = client.post(
+        "/encrypt",
+        json=payload,
+    )
+    assert encrypt_response.status_code == 200
+    encrypted_payload = encrypt_response.json()
+
+    decrypt_response = client.post("/decrypt", json=encrypted_payload)
+    assert decrypt_response.json() == payload
+
+
+def test_decrypt_with_encrypt_endpoint_with_None():
+    payload = {
+        "None": None,
+    }
+
+    encrypt_response = client.post(
+        "/encrypt",
+        json=payload,
+    )
+    assert encrypt_response.status_code == 200
+    encrypted_payload = encrypt_response.json()
+
+    decrypt_response = client.post("/decrypt", json=encrypted_payload)
+    assert decrypt_response.json() == payload
