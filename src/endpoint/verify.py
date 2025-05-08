@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
 from typing import Dict
-from services.verify_service import verify_payload
+from src.services.verify_service import verify_payload
 
 router = APIRouter()
 
