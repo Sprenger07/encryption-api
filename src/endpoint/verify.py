@@ -1,9 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
-import hmac
-import os
-import hashlib
 from typing import Dict
-import json
+from services.verify_service import verify_payload
 
 router = APIRouter()
 
@@ -19,15 +16,8 @@ def post_verify(payload: Dict | None = None) -> None:
     if payload.get("data") is None:
         raise HTTPException(status_code=400, detail="Missing data")
 
-    payload = dict(sorted(payload.items()))
+    data = payload.get("data")
+    signature = payload.get("signature")
 
-    secret_key = os.environ.get("SECRET_KEY")
-
-    signature = hmac.new(
-        bytes(secret_key, "utf-8"), bytes(json.dumps(payload), "utf-8"), hashlib.sha256
-    ).hexdigest()
-
-    if signature == payload.get("signature"):
-        return
-    else:
+    if not verify_payload(data, signature):
         HTTPException(status_code=400, detail="Invalid signature")
