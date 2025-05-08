@@ -2,7 +2,7 @@ from typing import Dict
 
 
 from fastapi import APIRouter, HTTPException
-from services.encryption_service import encrypt_payload
+from src.services.encryption_service import encrypt_payload
 
 router = APIRouter()
 

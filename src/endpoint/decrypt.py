@@ -1,7 +1,7 @@
 from typing import Dict
 
 from fastapi import APIRouter, HTTPException
-from services.decryption_service import decrypt_payload
+from src.services.decryption_service import decrypt_payload
 
 router = APIRouter()
 
