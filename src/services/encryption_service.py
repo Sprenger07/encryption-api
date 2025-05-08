@@ -9,7 +9,7 @@ class Encoder:
             format_value = json.dumps(value, separators=(",", ":"))
         else:
             format_value = str(value)
-        return base64.b64encode(format_value.encode("utf-8")).decode("utf-8")
+        return base64.b64encode(bytes(format_value, "utf-8"))
 
 
 def encrypt_payload(data: Dict) -> Dict:
