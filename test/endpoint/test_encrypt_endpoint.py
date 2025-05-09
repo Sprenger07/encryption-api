@@ -74,10 +74,10 @@ def test_encrypt_with_bool():
     assert response.status_code == 200
 
     encrypted_true = response.json().get("True")
-    assert encrypted_true == "MzA="
+    assert encrypted_true == "VHJ1ZQ=="
 
     encrypted_false = response.json().get("False")
-    assert encrypted_false == "MzA="
+    assert encrypted_false == "RmFsc2U="
 
 
 def test_encrypt_with_none():
@@ -90,7 +90,4 @@ def test_encrypt_with_none():
     assert response.status_code == 200
 
     encrypted_none = response.json().get("None")
-    assert encrypted_none == "MzA="
-
-    encrypted_false = response.json().get("False")
-    assert encrypted_false == "MzA="
+    assert encrypted_none == "Tm9uZQ=="

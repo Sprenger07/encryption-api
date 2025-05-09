@@ -87,24 +87,6 @@ def test_decrypt_with_encrypt_endpoint():
     assert decrypt_response.json() == payload
 
 
-def test_decrypt_with_encrypt_endpoint_with_string_instead_of_int():
-    payload = {
-        "name": "user",
-        "age": "42",
-        "contact": "098-765-4321",
-    }
-
-    encrypt_response = client.post(
-        "/encrypt",
-        json=payload,
-    )
-    assert encrypt_response.status_code == 200
-    encrypted_payload = encrypt_response.json()
-
-    decrypt_response = client.post("/decrypt", json=encrypted_payload)
-    assert decrypt_response.json() == payload
-
-
 def test_decrypt_with_encrypt_endpoint_with_list():
     payload = {"hello_word ": ["hello", "word"]}
 

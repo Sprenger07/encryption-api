@@ -42,4 +42,3 @@ def test_encode_decode_value_none():
     encoded_value = encoder.encode(value)
     decoded_value = decoder.decode(encoded_value)
     assert decoded_value == value
-
