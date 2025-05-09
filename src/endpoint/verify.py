@@ -20,4 +20,4 @@ def post_verify(payload: Dict | None = None) -> None:
     signature = payload.get("signature")
 
     if not verify_payload(data, signature):
-        HTTPException(status_code=400, detail="Invalid signature")
+        raise HTTPException(status_code=400, detail="Invalid signature")
