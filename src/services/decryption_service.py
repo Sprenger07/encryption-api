@@ -10,7 +10,7 @@ class Decoder:
             try:
                 return json.loads(decoded_value)
             except Exception:
-                return decoded_value
+                return decoded_value.decode("utf-8")
         except Exception:
             return value
 
