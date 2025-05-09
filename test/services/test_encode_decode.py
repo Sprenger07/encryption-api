@@ -34,3 +34,11 @@ def test_encode_decode_value_dictionary():
     encoded_value = encoder.encode(value)
     decoded_value = decoder.decode(encoded_value)
     assert decoded_value == value
+
+
+def test_encode_decode_value_none():
+    value = None
+
+    encoded_value = encoder.encode(value)
+    decoded_value = decoder.decode(encoded_value)
+    assert decoded_value == value
