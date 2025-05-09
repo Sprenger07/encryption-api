@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
 from typing import Dict
-from services.verify_service import verify_payload
+from src.services.verify_service import verify_payload
 
 router = APIRouter()
 
@@ -20,4 +20,4 @@ def post_verify(payload: Dict | None = None) -> None:
     signature = payload.get("signature")
 
     if not verify_payload(data, signature):
-        HTTPException(status_code=400, detail="Invalid signature")
+        raise HTTPException(status_code=400, detail="Invalid signature")

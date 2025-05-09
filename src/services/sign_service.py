@@ -3,10 +3,22 @@ import os
 import json
 from typing import Dict
 import hashlib
+import sys
 
 
 class Signer:
     secret_key = os.environ.get("SECRET_KEY")
+    if secret_key is None:
+        sys.exit(
+            """
+            Error: The environment variable SECRET_KEY is required.
+            Try :
+                docker run -e SECRET_KEY=your_secret_key
+            or
+                export SECRET_KEY=your_secret_key
+            """
+        )
+
     hash_algo = hashlib.sha256
 
     def sign(self, payload: Dict) -> str:
