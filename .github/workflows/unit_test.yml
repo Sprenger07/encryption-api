@@ -21,5 +21,5 @@ jobs:
       - name: Run unit tests
         run: pytest test/
         env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          SECRET_HASHING_KEY: ${{ secrets.SECRET_HASHING_KEY }}
         
