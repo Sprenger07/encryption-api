@@ -4,6 +4,9 @@ import json
 from typing import Dict
 import hashlib
 import sys
+from dotenv import load_dotenv
+
+load_dotenv(override=True)
 
 
 class Signer:
@@ -11,7 +14,7 @@ class Signer:
     if secret_hashing_key is None:
         sys.exit(
             """
-            Error: The environment variable SECRET_KEY is required.
+            Error: The environment variable SECRET_HASHING_KEY is required.
             Try :
                 docker run -e SECRET_HASHING_KEY=your_secret_key
             or
