@@ -1,5 +1,7 @@
 # Encryption API
 
+This API provides encoding, decoding, signing, and verification features for JSON data using Base64 and HMAC operations
+
 # Running locally
 
 ## 1) Create an virtual environment
