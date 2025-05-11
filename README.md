@@ -13,6 +13,11 @@ pip install -r requierements.txt
 ```
 
 ## 3) Run FastAPI
+
+```sh
+export SECRET_HASHING_KEY=your_secret_key
+```
+
 ```sh
 fastapi dev src/main.py
 ```
@@ -30,7 +35,7 @@ docker build -t riot-api .
 
 ## Run Image
 ```sh
-docker run -p 8000:8000 -e SECRET_KEY="your_secret_key" riot-api
+docker run -p 8000:8000 -e SECRET_HASHING_KEY="your_secret_hashing_key" riot-api
 ```
 
 # API Documentation
