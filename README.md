@@ -1,4 +1,4 @@
-# Riot-assessment
+# Encryption API
 
 # Running locally
 
@@ -30,12 +30,12 @@ pytest
 # Docker Deployement
 ## Build Image
 ```sh
-docker build -t riot-api .
+docker build -t encryption-api .
 ```
 
 ## Run Image
 ```sh
-docker run -p 8000:8000 -e SECRET_HASHING_KEY="your_secret_hashing_key" riot-api
+docker run -p 8000:8000 -e SECRET_HASHING_KEY="your_secret_hashing_key" encryption-api
 ```
 
 # API Documentation
