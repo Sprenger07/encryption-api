@@ -3,15 +3,18 @@ import json
 from typing import Dict
 
 
-class Encoder:
+class Encrypter:
+    def encoding_algo(self, formated_value) -> str:
+        return base64.b64encode(bytes(formated_value, "utf-8")).decode("utf-8")
+
     def encode(self, value) -> str:
         if isinstance(value, (dict, list)):
-            format_value = json.dumps(value, separators=(",", ":"))
+            formated_value = json.dumps(value, separators=(",", ":"))
         else:
-            format_value = str(value)
-        return base64.b64encode(bytes(format_value, "utf-8")).decode("utf-8")
+            formated_value = str(value)
+        return self.encoding_algo(formated_value)
 
 
 def encrypt_payload(data: Dict) -> Dict:
-    encoder = Encoder()
-    return {key: encoder.encode(value) for key, value in data.items()}
+    encrypter = Encrypter()
+    return {key: encrypter.encode(value) for key, value in data.items()}

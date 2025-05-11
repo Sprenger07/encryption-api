@@ -19,7 +19,8 @@ class Signer:
             """
         )
 
-    hash_algo = hashlib.sha256
+    def signing_algo(self):
+        return hashlib.sha256
 
     def sign(self, payload: Dict) -> str:
         payload = dict(sorted(payload.items()))
@@ -27,7 +28,7 @@ class Signer:
         key_bytes = bytes(self.secret_hashing_key, "utf-8")
         message = bytes(json.dumps(payload), "utf-8")
 
-        signature = hmac.new(key_bytes, message, self.hash_algo).hexdigest()
+        signature = hmac.new(key_bytes, message, self.signing_algo()).hexdigest()
 
         return signature
 

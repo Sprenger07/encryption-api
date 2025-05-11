@@ -3,10 +3,13 @@ import json
 from typing import Dict
 
 
-class Decoder:
-    def decode(self, value) -> str:
+class Decrypter:
+    def decoding_algo(self, value) -> bytes:
+        return base64.b64decode(value, validate=True)
+
+    def decode(self, value) -> str | list | dict | int | None:
         try:
-            decoded_value = base64.b64decode(value, validate=True)
+            decoded_value = self.decoding_algo(value)
             try:
                 return json.loads(decoded_value)
             except Exception:
@@ -22,5 +25,5 @@ class Decoder:
 
 
 def decrypt_payload(data: Dict) -> Dict:
-    decoder = Decoder()
-    return {key: decoder.decode(value) for key, value in data.items()}
+    decrypter = Decrypter()
+    return {key: decrypter.decode(value) for key, value in data.items()}
