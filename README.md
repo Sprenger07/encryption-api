@@ -14,12 +14,21 @@ source env/bin/activate
 pip install -r requierements.txt
 ```
 
-## 3) Run FastAPI
+## 3) Add your secret hashing key
+
+Add your SECRET_HASHING_KEY for the endpoint `/sign` in a .env file
+
+```sh
+SECRET_HASHING_KEY=your_secret_key
+```
+
+or export Secret with:
 
 ```sh
 export SECRET_HASHING_KEY=your_secret_key
 ```
 
+## 4) Run FastAPI
 ```sh
 fastapi dev src/main.py
 ```
